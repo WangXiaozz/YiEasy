@@ -13,6 +13,7 @@ export default defineConfig({
   },
   //配置代理
   server: {
+    host:'0.0.0.0',
     proxy: {
       '/api': {
         target: 'http://syt.atguigu.cn',
