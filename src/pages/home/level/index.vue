@@ -74,12 +74,12 @@ let $emit = defineEmits(['getLevel'])
         margin-right: 10px;
 
         &.active {
-          color: #55a6fe;
+          color: rgb(114, 218, 205)
         }
       }
 
       li:hover {
-        color: #55a6fe;
+        color: rgb(114, 218, 205);
         cursor: pointer;
       }
     }

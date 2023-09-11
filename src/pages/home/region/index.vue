@@ -67,11 +67,11 @@ const changeRegion = (region:string)=>{
         margin-right: 10px;
         margin-bottom: 10px;
         &.active {
-          color: #55a6fe;
+          color: rgb(114, 218, 205);
         }
       }
       li:hover {
-        color: #55a6fe;
+        color: rgb(114, 218, 205);
       }
     }
   }

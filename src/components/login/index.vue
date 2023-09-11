@@ -329,6 +329,7 @@
       border-top: 1px solid #ccc;
       border-bottom: 1px solid #ccc;
     }
+    
   
     .login {
       padding: 20px;

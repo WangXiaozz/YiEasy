@@ -1,11 +1,10 @@
 <!--  -->
 <template>
-    <div class="search">
-        <el-autocomplete placeholder="请输入内容" :trigger-on-focus="false"
-        @select="goDetail" v-model="hosname"
-      :fetch-suggestions="fetchData" ></el-autocomplete>
-        <el-button type="primary" :icon="Search">搜索</el-button>
-    </div>
+  <div class="search">
+    <el-autocomplete placeholder="请输入内容" :trigger-on-focus="false" @select="goDetail" v-model="hosname"
+      :fetch-suggestions="fetchData"></el-autocomplete>
+    <el-button type="primary" :icon="Search">搜索</el-button>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -36,23 +35,30 @@ const fetchData = async (keyword: string, cb: any) => {
   cb(showData);
 };
 //点击某一个推荐项
-const goDetail = (item:any) => {
+const goDetail = (item: any) => {
   //点击推荐项目进入医院详情页,将来需要携带query参数(医院的编码)
-  $router.push({ path: "/hospital/register",query:{hoscode:item.hoscode}});
+  $router.push({ path: "/hospital/register", query: { hoscode: item.hoscode } });
 };
 </script>
 
 <style lang="scss" scoped>
-.search{
-    width: 100%;
-    height: 50px;
-    margin-top: 10px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    :deep(.el-input__wrapper) {
+.search {
+  width: 100%;
+  height: 50px;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+  :deep(.el-input__wrapper) {
     width: 600px;
     margin-right: 10px;
   }
+
+  :deep(.el-button) {
+    border: 0;
+    background:  rgb(114, 218, 205);
+  }
+  
 }
 </style>

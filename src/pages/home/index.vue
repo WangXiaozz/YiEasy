@@ -18,7 +18,7 @@
                 <el-empty v-else description="暂无数据" />
                 <!-- 分页器 -->
                 <el-pagination v-model:current-page="pageNo" v-model:page-size="pageSize" :page-sizes="[10, 20, 30, 40]"
-                    :background="true" layout="prev, pager, next, jumper,->,sizes,total" :total="total"
+                     layout="prev, pager, next, jumper,->,sizes,total" :total="total"
                     @current-change="currentChange" @size-change="sizeChange" />
                 
             </el-col>
@@ -106,7 +106,11 @@ const getRegion = (region: string) => {
     justify-content: space-between;
     margin: 10px 0px;
     padding: 1px;
-
+    
 }
+:deep(.el-pager li.is-active){
+        color:rgb(114, 218, 205);
+        /* background-color: rgb(114, 218, 205); */
+    }
 </style>
   

@@ -93,7 +93,7 @@ const goUser = (path: string) => {
 
             p {
                 font-size: 20px;
-                color: #55a6fe;
+                color: rgb(114, 218, 205)
             }
         }
 
