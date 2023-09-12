@@ -61,5 +61,8 @@ const goUser = (path:string)=>{
   .content {
     flex: 8;
   }
+  :deep(.el-menu-item.is-active){
+    color: rgb(114, 218, 205);
+  }
 }
 </style>
