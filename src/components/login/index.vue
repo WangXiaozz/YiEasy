@@ -139,7 +139,7 @@
                 </div>
               </div>
             </div>
-            <p class="tip">尚医通官方指定平台</p>
+            <p class="tip">医易通官方指定平台</p>
             <p class="tip">快速挂号 安全放心</p>
           </el-col>
         </el-row>
@@ -152,14 +152,14 @@
   
   <script setup lang="ts">
   //引入wx扫码登录参数请求
-  import { reqWxLogin } from "@/api/hospital";
+  //import { reqWxLogin } from "@/api/hospital";
   //@ts-ignore
   import { ElMessage } from "element-plus";
   //引入倒计时组件
   import CountDown from "../countdown/index.vue";
   import { ref, reactive, computed, watch } from "vue";
   import { User, Lock } from "@element-plus/icons-vue";
-  import type { WXLoginResponseData } from "@/api/hospital/type";
+  //import type { WXLoginResponseData } from "@/api/hospital/type";
   import {useRouter,useRoute} from 'vue-router';
   //获取user仓库的数据( visiable)可以控制login组件的对话框显示与隐藏
   import useUserStore from "@/store/modules/user";
@@ -189,8 +189,8 @@
   const changeScene = async () => {
     //切换场景为1
     scene.value = 1;
-    //发请求获取微信扫码二维码需要参数
-    //咱们在想硅谷学校的服务器发请求,获取微信扫码登录页面参数
+    /* //发请求获取微信扫码二维码需要参数
+    //向服务器发请求,获取微信扫码登录页面参数
     //还需要携带一个参数:告诉学校服务器用户授权成功以后重定向项目某一个页面
     let redirect_URL = encodeURIComponent(window.location.origin + "/wxlogin");
     let result: WXLoginResponseData = await reqWxLogin(redirect_URL);
@@ -205,7 +205,7 @@
       state: result.data.state, //state就是学校服务器重定向的地址携带用户信息
       style: "black",
       href: "",
-    });
+    }); */
   };
   //获取验证码按钮的回调
   const getCode = async () => {
