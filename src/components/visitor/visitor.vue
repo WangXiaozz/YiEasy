@@ -6,27 +6,12 @@
         <span class="username">{{ user.name }}</span>
       </div>
       <div class="right">
-        <el-button
-          circle
-          type="primary"
-          size="default"
-          :icon="Edit"
-          @click="handler"
-        ></el-button>
+        <el-button circle type="primary" size="default" :icon="Edit" @click="handler"></el-button>
 
-        <el-popconfirm
-          @confirm="removeUser"
-          :title="`你确定要删除${user.name}`"
-          width="200px"
-        >
+        <el-popconfirm @confirm="removeUser" :title="`你确定要删除${user.name}`" width="200px">
           <template #reference>
-            <el-button
-              v-if="$route.path == '/user/patient'"
-              circle
-              type="danger"
-              size="default"
-              :icon="Delete"
-            ></el-button>
+            <el-button v-if="$route.path == '/user/patient'" circle type="danger" size="default"
+              :icon="Delete"></el-button>
           </template>
         </el-popconfirm>
       </div>
@@ -58,7 +43,7 @@ let $route = useRoute();
 let $router = useRouter();
 //接受父组件传递过来的就诊人信息展示
 let props = defineProps(["user", "index", "currentIndex"]);
-let $emit = defineEmits(["changeScene",'removeUser']);
+let $emit = defineEmits(["changeScene", 'removeUser']);
 
 //相应就诊人组件修改按钮的回调
 const handler = () => {
@@ -79,23 +64,25 @@ const removeUser = async () => {
     await reqRemoveUser(props.user.id);
     //消息提示
     ElMessage({
-      type:'success',
-      message:'删除成功'
+      type: 'success',
+      message: '删除成功'
     });
     $emit('removeUser');
-  } catch (error) {}
+  } catch (error) { }
 };
 </script>
 
 <style scoped lang="scss">
 .visitor {
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
+
   .top {
     height: 60px;
     background: #e5e5e5;
     display: flex;
     justify-content: space-around;
     align-items: center;
+
     .left {
       .free {
         background: white;
@@ -104,17 +91,29 @@ const removeUser = async () => {
         margin-right: 5px;
         border-radius: 10px;
       }
+
       .username {
         color: #7f7f7f;
       }
     }
+
+    .right {
+      :deep(.el-button) {
+        background-color: rgb(114, 218, 205);
+        border-color: rgb(114, 218, 205);
+        ;
+      }
+    }
   }
+
   .bottom {
     position: relative;
     padding: 20px;
+
     p {
       line-height: 40px;
     }
+
     .confirm {
       position: absolute;
       width: 200px;
