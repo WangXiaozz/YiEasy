@@ -329,6 +329,9 @@ const goStep2 = (doctor: Doctor) => {
         }
       }
     }
+    :deep(.el-pager li.is-active) {
+        color: rgb(114, 218, 205);
+    }
   }
   .bottom {
     .will {
