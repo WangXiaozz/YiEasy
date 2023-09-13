@@ -12,15 +12,8 @@
       </template>
       <!-- 卡片的身体部分展示就诊人信息 -->
       <div class="user">
-        <Visitor
-          @click="changeIndex(index)"
-          v-for="(user, index) in userArr"
-          :key="user.id"
-          class="item"
-          :user="user"
-          :index="index"
-          :currentIndex="currentIndex"
-        />
+        <Visitor @click="changeIndex(index)" v-for="(user, index) in userArr" :key="user.id" class="item" :user="user"
+          :index="index" :currentIndex="currentIndex" />
       </div>
     </el-card>
     <!-- 卡片:展示医生的信息 -->
@@ -79,13 +72,8 @@
     </el-card>
     <!-- 确定挂号按钮 -->
     <div class="btn">
-      <el-button
-        type="primary"
-        size="default"
-        :disabled="currentIndex == -1 ? true : false"
-        @click="submitOrder"
-        >确认挂号</el-button
-      >
+      <el-button type="primary" size="default" :disabled="currentIndex == -1 ? true : false"
+        @click="submitOrder">确认挂号</el-button>
     </div>
   </div>
 </template>
@@ -152,6 +140,7 @@ const submitOrder = async () => {
   let patientId = userArr.value[currentIndex.value].id;
   //提交订单
   let result: SubmitOrder = await reqSubmitOrder(hoscode, scheduleId, patientId);
+
   //提交订单成功
   if (result.code == 200) {
     $router.push({ path: "/user/order", query: { orderId: result.data } });
@@ -164,9 +153,9 @@ const submitOrder = async () => {
 };
 
 //预约挂号添加就诊人按钮的方法
-const goUser = ()=>{
-   //路由跳转
-   $router.push({path:'/user/patient',query:{type:'add'}})
+const goUser = () => {
+  //路由跳转
+  $router.push({ path: '/user/patient', query: { type: 'add' } })
 }
 </script>
 
@@ -177,16 +166,26 @@ const goUser = ()=>{
     color: #7f7f7f;
     font-size: 20px;
   }
+
   .box-card {
     margin: 20px 0px;
+
     .card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      :deep(.el-button) {
+        background-color: rgb(114, 218, 205);
+        border-color: rgb(114, 218, 205);
+        ;
+      }
     }
+
     .user {
       display: flex;
       flex-wrap: wrap;
+
       .item {
         width: 32%;
         margin: 5px;
@@ -198,6 +197,12 @@ const goUser = ()=>{
     display: flex;
     justify-content: center;
     margin: 10px 0px;
+
+    :deep(.el-button) {
+      background-color: rgb(114, 218, 205);
+      border-color: rgb(114, 218, 205);
+      ;
+    }
   }
 }
 </style>
