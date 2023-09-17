@@ -15,28 +15,28 @@
     <!-- 添加就诊人|修改已有的就诊人信息的结构 -->
     <div class="form" v-if="scene == 1">
       <el-divider content-position="left">就诊人信息</el-divider>
-      <el-form style="width: 60%; margin: 10px auto">
-        <el-form-item label="用户姓名">
+      <el-form style="width: 60%; margin: 10px auto" :model="userParams" :rules="rules">
+        <el-form-item label="用户姓名" prop="name">
           <el-input placeholder="请你输入用户姓名" v-model="userParams.name"></el-input>
         </el-form-item>
-        <el-form-item label="证件类型">
+        <el-form-item label="证件类型" prop="certificatesType">
           <el-select placeholder="请你选择证件的类型" style="width: 100%" v-model="userParams.certificatesType">
             <el-option v-for="item in certationArr" :key="item.id" :label="item.name" :value="item.value"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="证件号码">
+        <el-form-item label="证件号码" prop="certificatesNo">
           <el-input placeholder="请你输入证件号码" v-model="userParams.certificatesNo"></el-input>
         </el-form-item>
-        <el-form-item label="用户性别">
+        <el-form-item label="用户性别" prop="current">
           <el-radio-group v-model="userParams.sex">
             <el-radio :label="1">男</el-radio>
             <el-radio :label="0">女</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="出生日期">
+        <el-form-item label="出生日期" prop="current">
           <el-date-picker v-model="userParams.birthdate" value-format="YYYY-MM-DD" type="date" placeholder="请你选择日期" />
         </el-form-item>
-        <el-form-item label="手机号码">
+        <el-form-item label="手机号码" prop="phoneNO">
           <el-input placeholder="请你输入用户手机号码" v-model="userParams.phone"></el-input>
         </el-form-item>
       </el-form>
@@ -48,7 +48,7 @@
             <el-radio :label="0">未婚</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="自费/医保">
+        <el-form-item label="自费/医保" prop="current">
           <el-radio-group v-model="userParams.isInsure">
             <el-radio :label="1">自费</el-radio>
             <el-radio :label="0">医保</el-radio>
@@ -62,7 +62,7 @@
         </el-form-item>
       </el-form>
       <el-divider content-position="left">联系人信息（选填）</el-divider>
-      <el-form style="width: 60%; margin: 10px auto" label-width="80">
+      <el-form style="width: 60%; margin: 10px auto" label-width="80" :rules="rules">
         <el-form-item label="用户姓名">
           <el-input placeholder="请你输入用户姓名" v-model="userParams.contactsName"></el-input>
         </el-form-item>
@@ -256,6 +256,89 @@ const removeUser = () => {
   //再次获取全部的就诊人的信息
   getAllUser();
 }
+
+//自定义校验规则姓名方法
+const validatorName = (rule: any, value: any, callBack: any) => {
+  //rule:即为当前校验字段的校验规则对象
+  const reg = /^[\u00B7\u3007\u3400-\u4DBF\u4E00-\u9FFF\uE000-\uF8FF\uD840-\uD8C0\uDC00-\uDFFF\uF900-\uFAFF]+$/;
+  if (reg.test(value)) {
+    callBack();
+  } else {
+    callBack(new Error("请输入正确中国人的名字"));
+  }
+};
+
+//证件类型校验的方法
+const validatorType = (rule: any, value: any, callBack: any) => {
+  if (value == "10" || value == "20") {
+    callBack();
+  } else {
+    callBack(new Error("请选择证件的类型"));
+  }
+};
+
+//证件号码的校验方法
+const validatorNo = (rule: any, value: any, callBack) => {
+  let sfz = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{4}$/;
+  let hkb = /^\d{9}$/;
+  if (sfz.test(value) || hkb.test(value)) {
+    callBack();
+  } else {
+    callBack(new Error("请输入正确的身份证或者户口本的号码"));
+  }
+};
+
+//用户手机号码的校验方法
+const validatorPhoneNo = (rule:any,value:any,callBack) =>{
+  let phoneReg = /^1((34[0-8])|(8\d{2})|(([35][0-35-9]|4[579]|66|7[35678]|9[1389])\d{1}))\d{7}$/;
+  if(phoneReg.test(value)){
+    callBack();
+  }else{
+    callBack(new Error("请输入正确的手机号码"))
+  }
+};
+
+//其他必填信息
+const commonRule = (rule:any,value:any,callBack)=>{
+  if(value){ callBack(); }
+  else{ callBack(new Error("该项为必填项,请填写完整!")) }
+};
+
+const rules = {
+  //用户姓名的校验规则
+  //required:true,代表当前字段务必进行校验
+  name: [
+    {
+      required: true,
+      validator: validatorName,
+    },
+  ],
+  certificatesType: [
+    {
+      required: true,
+      validator: validatorType,
+    },
+  ],
+  certificatesNo: [
+    {
+      required: true,
+      validator: validatorNo,
+    },
+  ],
+  phoneNO:[
+    {
+      required:true,
+      validator:validatorPhoneNo
+    }
+  ],
+  
+  current:[
+    {
+      required:true,
+      validator:commonRule
+    }
+  ]
+};
 </script>
 
 <style scoped lang="scss">
