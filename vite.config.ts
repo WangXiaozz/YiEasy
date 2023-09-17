@@ -19,6 +19,7 @@ export default defineConfig({
         target: 'http://syt.atguigu.cn',
         changeOrigin: true
       },
-    }
+    },
+    open: true 
   }
 })
