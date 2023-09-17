@@ -4,22 +4,13 @@
     <template #header>
       <div class="card-header">
         <span>就诊人管理</span>
-        <el-button class="button" type="primary" :icon="User" @click="addUser"
-          >添加就诊人</el-button
-        >
+        <el-button class="button" type="primary" :icon="User" @click="addUser">添加就诊人</el-button>
       </div>
     </template>
     <!-- 就诊人管理模块展示就诊人信息的结构 -->
     <div class="visitors" v-if="scene == 0">
-      <Visitor
-        @changeScene="changeScene"
-        @removeUser="removeUser"
-        class="item"
-        v-for="(user, index) in userArr"
-        :key="user.id"
-        :user="user"
-        :index="index"
-      />
+      <Visitor @changeScene="changeScene" @removeUser="removeUser" class="item" v-for="(user, index) in userArr"
+        :key="user.id" :user="user" :index="index" />
     </div>
     <!-- 添加就诊人|修改已有的就诊人信息的结构 -->
     <div class="form" v-if="scene == 1">
@@ -29,24 +20,12 @@
           <el-input placeholder="请你输入用户姓名" v-model="userParams.name"></el-input>
         </el-form-item>
         <el-form-item label="证件类型">
-          <el-select
-            placeholder="请你选择证件的类型"
-            style="width: 100%"
-            v-model="userParams.certificatesType"
-          >
-            <el-option
-              v-for="item in certationArr"
-              :key="item.id"
-              :label="item.name"
-              :value="item.value"
-            ></el-option>
+          <el-select placeholder="请你选择证件的类型" style="width: 100%" v-model="userParams.certificatesType">
+            <el-option v-for="item in certationArr" :key="item.id" :label="item.name" :value="item.value"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="证件号码">
-          <el-input
-            placeholder="请你输入证件号码"
-            v-model="userParams.certificatesNo"
-          ></el-input>
+          <el-input placeholder="请你输入证件号码" v-model="userParams.certificatesNo"></el-input>
         </el-form-item>
         <el-form-item label="用户性别">
           <el-radio-group v-model="userParams.sex">
@@ -55,23 +34,13 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="出生日期">
-          <el-date-picker
-            v-model="userParams.birthdate"
-            value-format="YYYY-MM-DD"
-            type="date"
-            placeholder="请你选择日期"
-          />
+          <el-date-picker v-model="userParams.birthdate" value-format="YYYY-MM-DD" type="date" placeholder="请你选择日期" />
         </el-form-item>
         <el-form-item label="手机号码">
-          <el-input
-            placeholder="请你输入用户手机号码"
-            v-model="userParams.phone"
-          ></el-input>
+          <el-input placeholder="请你输入用户手机号码" v-model="userParams.phone"></el-input>
         </el-form-item>
       </el-form>
-      <el-divider content-position="left"
-        >建档信息（完善后部分医院首次就诊不排队建档）</el-divider
-      >
+      <el-divider content-position="left">建档信息（完善后部分医院首次就诊不排队建档）</el-divider>
       <el-form style="width: 60%; margin: 10px auto">
         <el-form-item label="婚姻状况">
           <el-radio-group v-model="userParams.isMarry">
@@ -89,45 +58,24 @@
           <el-cascader :props="props" v-model="userParams.addressSelected" />
         </el-form-item>
         <el-form-item label="详细地址">
-          <el-input
-            placeholder="请你输入用户详细地址"
-            v-model="userParams.address"
-          ></el-input>
+          <el-input placeholder="请你输入用户详细地址" v-model="userParams.address"></el-input>
         </el-form-item>
       </el-form>
       <el-divider content-position="left">联系人信息（选填）</el-divider>
       <el-form style="width: 60%; margin: 10px auto" label-width="80">
         <el-form-item label="用户姓名">
-          <el-input
-            placeholder="请你输入用户姓名"
-            v-model="userParams.contactsName"
-          ></el-input>
+          <el-input placeholder="请你输入用户姓名" v-model="userParams.contactsName"></el-input>
         </el-form-item>
         <el-form-item label="证件类型">
-          <el-select
-            placeholder="请你选择证件的类型"
-            style="width: 100%"
-            v-model="userParams.contactsCertificatesType"
-          >
-            <el-option
-              v-for="item in certationArr"
-              :key="item.id"
-              :label="item.name"
-              :value="item.value"
-            ></el-option>
+          <el-select placeholder="请你选择证件的类型" style="width: 100%" v-model="userParams.contactsCertificatesType">
+            <el-option v-for="item in certationArr" :key="item.id" :label="item.name" :value="item.value"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="证件号码">
-          <el-input
-            placeholder="请你输入证件号码"
-            v-model="userParams.contactsCertificatesNo"
-          ></el-input>
+          <el-input placeholder="请你输入证件号码" v-model="userParams.contactsCertificatesNo"></el-input>
         </el-form-item>
         <el-form-item label="手机号码">
-          <el-input
-            placeholder="请你输入用户手机号码"
-            v-model="userParams.contactsPhone"
-          ></el-input>
+          <el-input placeholder="请你输入用户手机号码" v-model="userParams.contactsPhone"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" size="default" @click="submit">提交</el-button>
@@ -218,7 +166,7 @@ const changeScene = (user: AddOrUpdateUser) => {
 
 const reset = () => {
   Object.assign(userParams, {
-    id:null,
+    id: null,
     name: "",
     certificatesType: "",
     certificatesNo: "",
@@ -295,18 +243,18 @@ watch(
   () => userArr.value,
   () => {
     if ($route.query.type == "edit") {
-       let user  = userArr.value.find((item:any)=>{
-           return item.id==$route.query.id;
-       });
-      Object.assign(userParams,user)
+      let user = userArr.value.find((item: any) => {
+        return item.id == $route.query.id;
+      });
+      Object.assign(userParams, user)
     }
   }
 );
 
 //子组件自定义事件:删除按钮触发
-const removeUser = ()=>{
+const removeUser = () => {
   //再次获取全部的就诊人的信息
-   getAllUser();
+  getAllUser();
 }
 </script>
 
@@ -315,6 +263,12 @@ const removeUser = ()=>{
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  :deep(.el-button) {
+    background-color: rgb(114, 218, 205);
+    border-color: rgb(114, 218, 205);
+    ;
+  }
 }
 
 .visitors {
