@@ -338,15 +338,16 @@ const rules = {
     border-color: rgb(114, 218, 205);
     background: rgb(114, 218, 205);
   }
-  :deep(.el-radio__input.is-checked+.el-radio__label){
+
+  :deep(.el-radio__input.is-checked+.el-radio__label) {
     color: rgb(114, 218, 205);
   }
 
   :deep(.el-button) {
-              background-color: rgb(114, 218, 205);
-              border-color: rgb(114, 218, 205);
-              ;
-            }
+    background-color: rgb(114, 218, 205);
+    border-color: rgb(114, 218, 205);
+    ;
+  }
 }
 
 .card-header {
