@@ -27,7 +27,7 @@
       </el-form-item>
     </el-form>
     <!-- 表格展示订单的数据 -->
-    <el-table border style="margin: 10px 0px" :data="allOrderArr">
+    <el-table border style="margin: 10px 0px" :data="allOrderArr" stripe="true">
       <el-table-column label="就诊时间" prop="reserveDate"></el-table-column>
       <el-table-column label="医院" prop="hosname"></el-table-column>
       <el-table-column label="科室" prop="depname"></el-table-column>
@@ -37,7 +37,7 @@
       <el-table-column label="订单状态" prop="param.orderStatusString"></el-table-column>
       <el-table-column label="操作">
         <template #="{ row }">
-          <el-button type="text" @click="goDetail(row)">详情</el-button>
+          <el-button type="text" @click="goDetail(row)" class="textColor">详情</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -125,6 +125,7 @@ const getData = async () => {
   const result1: AllOrderStateResponseData = await reqOrderState();
   allUser.value = result.data;
   allOrderState.value = result1.data;
+
 };
 
 //就诊人下拉菜单回调方法
@@ -138,4 +139,15 @@ const changeOrderState = ()=>{
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.box-card{
+  :deep(.el-pager li.is-active){
+        /* color:rgb(114, 218, 205); */
+        background-color: rgb(114, 218, 205);
+    }
+
+    .textColor{
+      color: rgb(114, 218, 205);
+    }
+}
+</style>
