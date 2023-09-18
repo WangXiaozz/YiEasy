@@ -7,7 +7,10 @@ export default createRouter({
     routes:[
         {
             path:'/home',
-            component:() => import('@/pages/home/index.vue')
+            component:() => import('@/pages/home/index.vue'),
+            meta:{
+                title:'首页'
+            }
         },
         {
             path:'/hospital',
@@ -52,12 +55,15 @@ export default createRouter({
                     path:'register_step1',
                     component:()=> import('@/pages/hospital/register/register_step1.vue'),
                     meta:{
-                        titile:'预约第一步'
+                        title:'取号'
                     }
                 },
                 {
                     path:'register_step2',
                     component:()=> import('@/pages/hospital/register/register_step2.vue'),
+                    meta:{
+                        title:'选择就诊人'
+                    }
                 }
             ]
         },
