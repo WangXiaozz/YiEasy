@@ -7,13 +7,14 @@ import HospitalTop from '@/components/hospital_top/index.vue'
 import HospitalBottom from '@/components/hospital_bottom/index.vue'
 //引入登录组件
 import Login from '@/components/Login/index.vue'
-//
+//引入就诊人组件
 import Visitor from '@/components/visitor/visitor.vue'
-
-
-
+//引入计时器组件
 import CountDown from '@/components/countdown/index.vue'
+//引入路由
 import router from '@/router'
+//引入路由鉴权文件
+import "./permisstion"
 //引入element-plus插件
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css' 
