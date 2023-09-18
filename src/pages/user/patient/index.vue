@@ -27,13 +27,13 @@
         <el-form-item label="证件号码" prop="certificatesNo">
           <el-input placeholder="请你输入证件号码" v-model="userParams.certificatesNo"></el-input>
         </el-form-item>
-        <el-form-item label="用户性别" prop="current">
+        <el-form-item label="用户性别" style="margin-left: 9px;">
           <el-radio-group v-model="userParams.sex">
             <el-radio :label="1">男</el-radio>
             <el-radio :label="0">女</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="出生日期" prop="current">
+        <el-form-item label="出生日期" style="margin-left: 9px;">
           <el-date-picker v-model="userParams.birthdate" value-format="YYYY-MM-DD" type="date" placeholder="请你选择日期" />
         </el-form-item>
         <el-form-item label="手机号码" prop="phoneNO">
@@ -48,7 +48,7 @@
             <el-radio :label="0">未婚</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="自费/医保" prop="current">
+        <el-form-item label="自费/医保">
           <el-radio-group v-model="userParams.isInsure">
             <el-radio :label="1">自费</el-radio>
             <el-radio :label="0">医保</el-radio>
@@ -289,20 +289,16 @@ const validatorNo = (rule: any, value: any, callBack) => {
 };
 
 //用户手机号码的校验方法
-const validatorPhoneNo = (rule:any,value:any,callBack) =>{
+const validatorPhoneNo = (rule: any, value: any, callBack) => {
   let phoneReg = /^1((34[0-8])|(8\d{2})|(([35][0-35-9]|4[579]|66|7[35678]|9[1389])\d{1}))\d{7}$/;
-  if(phoneReg.test(value)){
+  if (phoneReg.test(value)) {
     callBack();
-  }else{
+  } else {
     callBack(new Error("请输入正确的手机号码"))
   }
 };
 
-//其他必填信息
-const commonRule = (rule:any,value:any,callBack)=>{
-  if(value){ callBack(); }
-  else{ callBack(new Error("该项为必填项,请填写完整!")) }
-};
+
 
 const rules = {
   //用户姓名的校验规则
@@ -325,23 +321,34 @@ const rules = {
       validator: validatorNo,
     },
   ],
-  phoneNO:[
+  phoneNO: [
     {
-      required:true,
-      validator:validatorPhoneNo
+      required: true,
+      validator: validatorPhoneNo
     }
   ],
-  
-  current:[
-    {
-      required:true,
-      validator:commonRule
-    }
-  ]
+
+
 };
 </script>
 
 <style scoped lang="scss">
+.form {
+  :deep(.el-radio__input.is-checked .el-radio__inner) {
+    border-color: rgb(114, 218, 205);
+    background: rgb(114, 218, 205);
+  }
+  :deep(.el-radio__input.is-checked+.el-radio__label){
+    color: rgb(114, 218, 205);
+  }
+
+  :deep(.el-button) {
+              background-color: rgb(114, 218, 205);
+              border-color: rgb(114, 218, 205);
+              ;
+            }
+}
+
 .card-header {
   display: flex;
   justify-content: space-between;
